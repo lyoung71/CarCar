@@ -11,6 +11,7 @@ django.setup()
 
 # Import models from sales_rest, here.
 # from sales_rest.models import Something
+from sales_rest.models import AutomobileVO
 
 
 def poll(repeat=True):
@@ -19,11 +20,16 @@ def poll(repeat=True):
         try:
             # Write your polling logic, here
             # Do not copy entire file
-
-            pass
+            url = "http://project-beta-inventory-api-1:8000/api/automobiles/"
+            response = requests.get(url)
+            content = json.loads(response.content)
+            for automobile in content["automobiles"]:
+                AutomobileVO.objects.update_or_create(
+                    href=automobile["href"],
+                )
         except Exception as e:
             print(e, file=sys.stderr)
-        
+
         if (not repeat):
             break
 
