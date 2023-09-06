@@ -7,9 +7,31 @@ class AutomobileDetailEncoder(ModelEncoder):
     properties = ["href", "vin", "sold"]
 
 
+class SalespersonEncoder(ModelEncoder):
+    model = Salesperson
+    properties = [
+        "id",
+        "first_name",
+        "last_name",
+        "employee_id",
+    ]
+
+
+class CustomerEncoder(ModelEncoder):
+    model = Customer
+    properties = [
+        "id",
+        "first_name",
+        "last_name",
+        "address",
+        "phone_number",
+    ]
+
+
 class SaleListEncoder(ModelEncoder):
     model = Sale
     properties = [
+        "id",
         "automobile",
         "salesperson",
         "customer",
@@ -33,24 +55,7 @@ class SaleDetailEncoder(ModelEncoder):
         "price",
     ]
     encoders = {
-        "automobile": AutomobileDetailEncoder()
+        "automobile": AutomobileDetailEncoder(),
+        "salesperson": SalespersonEncoder(),
+        "customer": CustomerEncoder(),
     }
-
-
-class SalespersonListEncoder(ModelEncoder):
-    model = Salesperson
-    properties = [
-        "first_name",
-        "last_name",
-        "employee_id",
-    ]
-
-
-class CustomerListEncoder(ModelEncoder):
-    model = Customer
-    properties = [
-        "first_name",
-        "last_name",
-        "address",
-        "phone_number",
-    ]

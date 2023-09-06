@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import (list_sales, show_sale, list_salespeople,
-    show_salesperson, list_customers, show_customer)
+                    show_salesperson, list_customers, show_customer)
 
 urlpatterns = [
     path("sales/", list_sales, name="list_sales"),

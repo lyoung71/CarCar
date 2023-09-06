@@ -3,7 +3,7 @@ from.models import AutomobileVO, Sale, Salesperson, Customer
 from django.views.decorators.http import require_http_methods
 from json import loads
 from django.http import JsonResponse
-from .encoders import SaleListEncoder, SaleDetailEncoder, CustomerListEncoder, SalespersonListEncoder
+from .encoders import SaleListEncoder, SaleDetailEncoder, CustomerEncoder, SalespersonEncoder
 # Create your views here.
 
 
@@ -67,25 +67,25 @@ def list_salespeople(request):
         salespeople = Salesperson.objects.all()
         return JsonResponse(
             {"salespeople": salespeople},
-            encoder=SalespersonListEncoder,
+            encoder=SalespersonEncoder,
         )
     else:
         content = loads(request.body)
 
-        try:
-            salesperson_id = content["salesperson"]
-            salesperson_href = f"/api/salespeople/{salesperson_id}/"
-            salesperson = Salesperson.objects.get(href=salesperson_href)
-            content["salesperson"] = salesperson
-        except Salesperson.DoesNotExist:
-            return JsonResponse(
-                {"message": "invalid salesperson id"},
-                status=400,
-            )
+        # try:
+        #     salesperson_id = content["salesperson_id"]
+        #     salesperson_href = f"/api/salespeople/{salesperson_id}/"
+        #     salesperson = Salesperson.objects.get(id=salesperson_href)
+        #     content["salesperson"] = salesperson
+        # except Salesperson.DoesNotExist:
+        #     return JsonResponse(
+        #         {"message": "invalid salesperson id"},
+        #         status=400,
+        #     )
         salesperson = Salesperson.objects.create(**content)
         return JsonResponse(
             salesperson,
-            encoder=SalespersonListEncoder,
+            encoder=SalespersonEncoder,
             safe=False,
         )
 
@@ -96,7 +96,7 @@ def show_salesperson(request, id):
         salesperson = Salesperson.objects.get(id=id)
         return JsonResponse(
             salesperson,
-            encoder=SalespersonListEncoder,
+            encoder=SalespersonEncoder,
             safe=False,
         )
     elif request.method == "DELETE":
@@ -114,7 +114,7 @@ def show_salesperson(request, id):
         salesperson = Salesperson.objects.get(id=id)
         return JsonResponse(
             salesperson,
-            encoder=SalespersonListEncoder,
+            encoder=SalespersonEncoder,
             safe=False
         )
 
@@ -125,25 +125,25 @@ def list_customers(request):
         customers = Customer.objects.all()
         return JsonResponse(
             {"customers": customers},
-            encoder=CustomerListEncoder,
+            encoder=CustomerEncoder,
         )
     else:
         content = loads(request.body)
 
-        try:
-            customer_id = content["customer"]
-            customer_href = f"/api/customers/{customer_id}/"
-            customer = Customer.objects.get(href=customer_href)
-            content["customer"] = customers
-        except Salesperson.DoesNotExist:
-            return JsonResponse(
-                {"message": "invalid customer id"},
-                status=400,
-            )
+        # try:
+        #     customer_id = content["customer"]
+        #     customer_href = f"/api/customers/{customer_id}/"
+        #     customer = Customer.objects.get(href=customer_href)
+        #     content["customer"] = customers
+        # except Salesperson.DoesNotExist:
+        #     return JsonResponse(
+        #         {"message": "invalid customer id"},
+        #         status=400,
+        #     )
         customer = Customer.objects.create(**content)
         return JsonResponse(
             customer,
-            encoder=CustomerListEncoder,
+            encoder=CustomerEncoder,
             safe=False,
         )
 
@@ -154,7 +154,7 @@ def show_customer(request, id):
         customer = Customer.objects.get(id=id)
         return JsonResponse(
             customer,
-            encoder=CustomerListEncoder,
+            encoder=CustomerEncoder,
             safe=False,
         )
     elif request.method == "DELETE":
@@ -172,6 +172,6 @@ def show_customer(request, id):
         customer = Customer.objects.get(id=id)
         return JsonResponse(
             customer,
-            encoder=CustomerListEncoder,
+            encoder=CustomerEncoder,
             safe=False
         )
