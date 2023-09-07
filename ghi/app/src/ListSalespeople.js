@@ -31,7 +31,7 @@ function ListSalespeople() {
     }
 
     useEffect(() => {
-        loadSalespeople()
+        loadSalespeople();
     }, []);
 
     return (
@@ -40,7 +40,7 @@ function ListSalespeople() {
                 <tr>
                     <th>First name</th>
                     <th>Last name</th>
-                    <th>Emploee ID</th>
+                    <th>Employee ID</th>
                 </tr>
             </thead>
             <tbody>

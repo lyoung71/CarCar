@@ -15,21 +15,42 @@ def list_sales(request):
         sales = Sale.objects.all()
         return JsonResponse(
             {"sales": sales},
-            encoder=SaleListEncoder,
+            encoder=SaleDetailEncoder,
         )
     else:
         content = loads(request.body)
-
+        print(content)
         try:
             automobile_vo_id = content["automobile"]
-            automobile_href = f"/api/automobiles/{automobile_vo_id}/"
-            automobile = AutomobileVO.objects.get(href=automobile_href)
+            automobile_vin = f"/api/automobiles/{automobile_vo_id}/"
+            automobile = AutomobileVO.objects.get(href=automobile_vin)
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                {"message": "invalid automobile id"},
+                {"message": "invalid automobile VIN"},
                 status=400,
             )
+
+        try:
+            customer_id = content["customer"]
+            customer = Customer.objects.get(id=customer_id)
+            content["customer"] = customer
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "invalid customer ID"},
+                status=400,
+            )
+
+        try:
+            salesperson_id = content["salesperson"]
+            salesperson = Salesperson.objects.get(id=salesperson_id)
+            content["salesperson"] = salesperson
+        except Salesperson.DoesNotExist:
+            return JsonResponse(
+                {"message": "invalid salesperson ID"},
+                status=400,
+            )
+
         sale = Sale.objects.create(**content)
         return JsonResponse(
             sale,
@@ -118,6 +139,7 @@ def show_salesperson(request, id):
             safe=False
         )
 
+# @require_http_methods("GET"):
 
 @require_http_methods(["GET", "POST"])
 def list_customers(request):

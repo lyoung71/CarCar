@@ -46,18 +46,17 @@ function SaleForm () {
     }
 
     const fetchSalespeopleData = async () => {
-        const url = "http://localhost:8090/api/salespeople/";
-        const response = await fetch(url);
+        const salespeopleUrl = "http://localhost:8090/api/salespeople/";
+        const response = await fetch(salespeopleUrl);
         if(response.ok) {
             const data = await response.json();
-            console.log(data)
             setSalespeople(data.salespeople);
         }
     }
 
     const fetchAutomobileData = async () => {
-        const url = "http://localhost:8100/api/automobiles/";
-        const response = await fetch(url);
+        const autmobileUrl = "http://localhost:8100/api/automobiles/";
+        const response = await fetch(autmobileUrl);
         if(response.ok) {
             const data = await response.json();
             setAutomobiles(data.autos);
@@ -65,8 +64,8 @@ function SaleForm () {
     }
 
     const fetchCustomerData = async () => {
-        const url = "http://localhost:8090/api/customers/";
-        const response = await fetch(url);
+        const customersUrl = "http://localhost:8090/api/customers/";
+        const response = await fetch(customersUrl);
         if(response.ok) {
             const data = await response.json();
             setCustomers(data.customers);

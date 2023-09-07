@@ -22,10 +22,16 @@ def poll(repeat=True):
             # Do not copy entire file
             url = "http://project-beta-inventory-api-1:8000/api/automobiles/"
             response = requests.get(url)
+            print(response)
             content = json.loads(response.content)
-            for automobile in content["automobiles"]:
+            print(content)
+            for auto in content["autos"]:
                 AutomobileVO.objects.update_or_create(
-                    vin=automobile["vin"],
+                    href=auto["href"],
+                    defaults={
+                        "vin": auto["vin"],
+                        "sold": auto["sold"],
+                    },
                 )
         except Exception as e:
             print(e, file=sys.stderr)
