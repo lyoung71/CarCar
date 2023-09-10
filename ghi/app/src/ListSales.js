@@ -51,7 +51,7 @@ function ListSales(props) {
                     <td>{ sale.automobile.vin }</td>
                     <td>{ sale.salesperson.employee_id}</td>
                     <td>{ sale.customer.first_name } {sale.customer.last_name} </td>
-                    <td>{ sale.price }</td>
+                    <td>${ sale.price }</td>
                     <td><button type="button" onClick={() => handleDelete(sale.id)}>Delete</button></td>
                 </tr>
                 );

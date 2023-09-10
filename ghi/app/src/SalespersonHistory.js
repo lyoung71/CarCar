@@ -22,10 +22,15 @@ function ListSalesPersonHistory(props) {
         }
     }
 
+
+
+    // const filteredList = useMemo(getFilteredList, [salesperson, sales]);
+
     async function loadSales() {
         const response = await fetch("http://localhost:8090/api/sales/");
         if(response.ok) {
             const data = await response.json();
+            console.log(data)
             setSales(data.sales)
         } else {
             console.error(response);
@@ -50,6 +55,13 @@ function ListSalesPersonHistory(props) {
         const value = event.target.value;
         setSalesperson(value);
     }
+    const getFilteredList = () => {
+        if (!salesperson) {
+            return sales;
+        }
+        return (sales.filter((sale) => sale.salesperson.employee_id.includes(salesperson)))
+    }
+
 
     return (
         <>
@@ -57,10 +69,9 @@ function ListSalesPersonHistory(props) {
             <select value={salesperson} onChange={handleSalespersonChange} id="salesperson" required name="salesperson" className="form-select">
                 <option value={salespeople}>Choose a salesperson</option>
                 {salespeople.map(salesperson => {
-                    console.log(salespeople);
                     return (
-                        <option key={salesperson.id} value={salesperson.id}>
-                            {salesperson.first_name}
+                        <option key={salesperson.id} value={salesperson.employee_id}>
+                            {salesperson.employee_id}
                         </option>
                     );
                 })}
@@ -69,20 +80,22 @@ function ListSalesPersonHistory(props) {
         <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Salesperson</th>
+                        <th>Salesperson Name</th>
+                        <th>Employee ID</th>
                         <th>Customer</th>
                         <th>VIN</th>
                         <th>Price</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {sales.map(sale => {
+                    {getFilteredList().map(sale => {
                         return (
                             <tr key={sale.id}>
+                                <td>{sale.salesperson.first_name} {sale.salesperson.last_name}</td>
                                 <td>{sale.salesperson.employee_id}</td>
                                 <td>{sale.customer.first_name} {sale.customer.last_name} </td>
                                 <td>{sale.automobile.vin}</td>
-                                <td>{sale.price}</td>
+                                <td>${sale.price}</td>
                                 <td><button type="button" onClick={() => handleDelete(sale.id)}>Delete</button></td>
                             </tr>
                         );

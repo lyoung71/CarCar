@@ -19,7 +19,7 @@ def list_sales(request):
         )
     else:
         content = loads(request.body)
-        print(content)
+
         try:
             automobile_vo_id = content["automobile"]
             automobile_vin = f"/api/automobiles/{automobile_vo_id}/"
@@ -69,8 +69,14 @@ def show_sale(request, id):
             safe=False,
         )
     elif request.method == "DELETE":
-        count, _ = Sale.objects.filter(id=id).delete()
-        return JsonResponse({"deleted": count > 0})
+        try:
+            count, _ = Sale.objects.filter(id=id).delete()
+            return JsonResponse({"deleted": count > 0})
+        except Sale.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid Sale id"},
+                status=404,
+            )
     else:
         content = loads(request.body)
         Sale.objects.filter(id=id).update(**content)
@@ -93,16 +99,6 @@ def list_salespeople(request):
     else:
         content = loads(request.body)
 
-        # try:
-        #     salesperson_id = content["salesperson_id"]
-        #     salesperson_href = f"/api/salespeople/{salesperson_id}/"
-        #     salesperson = Salesperson.objects.get(id=salesperson_href)
-        #     content["salesperson"] = salesperson
-        # except Salesperson.DoesNotExist:
-        #     return JsonResponse(
-        #         {"message": "invalid salesperson id"},
-        #         status=400,
-        #     )
         salesperson = Salesperson.objects.create(**content)
         return JsonResponse(
             salesperson,

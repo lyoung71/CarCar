@@ -87,8 +87,8 @@ function SaleForm () {
                     <form onSubmit={handleSubmit} id="create-sale-form">
 
                         <div className="mb-3">
-                            <select onChange={handleFormChange} required name="automobile" id="automobile" className="form-select">
-                                <option value={formData.automobile}>Choose an automobile</option>
+                            <select value= {formData.automobile} onChange={handleFormChange} required name="automobile" id="automobile" className="form-select">
+                                <option value=""> Choose an automobile</option>
                                 {automobiles.map(automobile=> {
                                     return (
                                         <option key={automobile.vin} value={automobile.vin}>{automobile.vin}</option>
@@ -97,8 +97,8 @@ function SaleForm () {
                             </select>
                         </div>
                         <div className="mb-3">
-                            <select onChange={handleFormChange} required name="salesperson" id="salesperson" className="form-select">
-                                <option value={formData.salesperson}>Choose a salesperson</option>
+                            <select value={formData.salesperson} onChange={handleFormChange} required name="salesperson" id="salesperson" className="form-select">
+                                <option value=""> Choose a salesperson</option>
                                 {salespeople.map(salesperson=> {
                                     return (
                                         <option key={salesperson.id} value={salesperson.id}>{salesperson.employee_id}</option>
@@ -107,8 +107,8 @@ function SaleForm () {
                             </select>
                         </div>
                         <div className="mb-3">
-                            <select onChange={handleFormChange} required name="customer" id="customer" className="form-select">
-                                <option value={formData.customer}>Choose a customer</option>
+                            <select value={formData.customer} onChange={handleFormChange} required name="customer" id="customer" className="form-select">
+                                <option value=""> Choose a customer</option>
                                 {customers.map(customer=> {
                                     return (
                                         <option key={customer.id} value={customer.id}>{customer.first_name + " " + customer.last_name}</option>
@@ -116,7 +116,6 @@ function SaleForm () {
                                 })}
                             </select>
                         </div>
-
                         <div className="form-floating mb-3">
                             <input value = {formData.price} onChange={handleFormChange} placeholder="Price" required type="text" name="price" id="price" className="form-control" />
                             <label htmlFor="price">Price</label>
