@@ -2,7 +2,7 @@
 
 Team:
 
-* Person 1 - Which microservice?
+* Landon - Sales
 * Person 2 - Which microservice?
 
 ## Design
@@ -14,5 +14,4 @@ microservice, here.
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+Models will include a sale, customer, salesperson, and automobileVO objects. Will use poller to pull automobile data from the inventory microservice/API.
