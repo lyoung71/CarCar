@@ -15,7 +15,6 @@ function ListSalespeople() {
         const response = await fetch(salespersonUrl, fetchConfig);
 
         if (response.ok) {
-            console.log("The salesperson has been deleted");
             loadSalespeople();
         }
     }
@@ -58,7 +57,5 @@ function ListSalespeople() {
         </table>
         );
 }
-
-
 
 export default ListSalespeople

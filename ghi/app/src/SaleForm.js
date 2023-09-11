@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 
 function SaleForm () {
     const[automobiles, setAutomobiles] = useState([]);
@@ -31,7 +31,29 @@ function SaleForm () {
                 price: "",
             });
         }
-    }
+
+
+        const automobileUrl = `http://localhost:8100/api/automobiles/${formData.automobile}/`;
+        const fetchSoldStatusConfig = {
+            method: "put",
+            body: JSON.stringify({sold: true}),
+            headers: {
+                "Content-Type": "application/json"
+            },
+        };
+        const soldResponse = await fetch (automobileUrl, fetchSoldStatusConfig);
+        if (soldResponse.ok) {
+            setAutomobiles(automobiles => automobiles.map(automobile => {
+                if (automobile.vin === formData.automobile) {
+                    return {
+                        ...automobile,
+                        sold: true
+                    }
+                }
+                return automobile
+            })
+            )
+    }}
 
 
     const handleFormChange = (e) => {
@@ -55,8 +77,8 @@ function SaleForm () {
     }
 
     const fetchAutomobileData = async () => {
-        const autmobileUrl = "http://localhost:8100/api/automobiles/";
-        const response = await fetch(autmobileUrl);
+        const automobileUrl = "http://localhost:8100/api/automobiles/";
+        const response = await fetch(automobileUrl);
         if(response.ok) {
             const data = await response.json();
             setAutomobiles(data.autos);
@@ -79,17 +101,21 @@ function SaleForm () {
         fetchSalespeopleData();
     }, []);
 
+    const filteredAutomobiles = automobiles.filter(automobile => {
+        return automobile.sold === false;
+    });
+
     return (
+        <>
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                     <h1>Create a new sale</h1>
                     <form onSubmit={handleSubmit} id="create-sale-form">
-
                         <div className="mb-3">
                             <select value= {formData.automobile} onChange={handleFormChange} required name="automobile" id="automobile" className="form-select">
                                 <option value=""> Choose an automobile</option>
-                                {automobiles.map(automobile=> {
+                                {filteredAutomobiles.map(automobile => {
                                     return (
                                         <option key={automobile.vin} value={automobile.vin}>{automobile.vin}</option>
                                     );
@@ -125,11 +151,8 @@ function SaleForm () {
                 </div>
             </div>
         </div>
+        </>
         );
 }
-
-
-
-
 
 export default SaleForm

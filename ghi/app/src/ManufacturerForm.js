@@ -23,7 +23,6 @@ function ManufacturerForm () {
         }
     }
 
-
     const handleFormChange = (e) => {
         const value = e.target.value;
         const inputName = e.target.name;
@@ -34,6 +33,7 @@ function ManufacturerForm () {
         }));
     }
 
+    useEffect(() => {}, []);
 
         return (
             <div className="row">
@@ -52,11 +52,5 @@ function ManufacturerForm () {
         </div>
         );
 }
-
-
-
-
-
-
 
 export default ManufacturerForm

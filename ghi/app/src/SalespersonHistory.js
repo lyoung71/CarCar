@@ -17,20 +17,14 @@ function ListSalesPersonHistory(props) {
         const response = await fetch(saleUrl, fetchConfig);
 
         if (response.ok) {
-            console.log("The sale has been deleted");
             loadSales();
         }
     }
-
-
-
-    // const filteredList = useMemo(getFilteredList, [salesperson, sales]);
 
     async function loadSales() {
         const response = await fetch("http://localhost:8090/api/sales/");
         if(response.ok) {
             const data = await response.json();
-            console.log(data)
             setSales(data.sales)
         } else {
             console.error(response);

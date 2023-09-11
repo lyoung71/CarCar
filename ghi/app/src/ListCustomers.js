@@ -14,7 +14,6 @@ function ListCustomers() {
         const response = await fetch(customerUrl, fetchConfig);
 
         if (response.ok) {
-            console.log("The customer has been deleted");
             loadCustomers();
         }
     }
@@ -59,12 +58,5 @@ function ListCustomers() {
         </table>
         );
 }
-
-
-
-
-
-
-
 
 export default ListCustomers

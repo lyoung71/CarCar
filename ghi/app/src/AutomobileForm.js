@@ -31,7 +31,6 @@ function AutomobileForm () {
         }
     }
 
-
     const handleFormChange = (e) => {
         const value = e.target.value;
         const inputName = e.target.name;
@@ -51,8 +50,6 @@ function AutomobileForm () {
             setModels(data.models);
         }
     }
-
-
 
     useEffect(() => {
         fetchModelsData();
@@ -93,6 +90,5 @@ function AutomobileForm () {
         </div>
         );
 }
-
 
 export default AutomobileForm

@@ -42,16 +42,6 @@ function CustomerForm() {
         }));
     }
 
-    // const fetchData = async () => {
-    //     const url = "http://localhost:8090/api/salespeople/";
-    //     const response = await fetch(url);
-    //     if(response.ok) {
-    //         const data = await response.json();
-    //         setFormData(data.formData);
-
-    //     }
-    // }
-
     useEffect(() => {}, []);
 
     return (
@@ -85,9 +75,5 @@ function CustomerForm() {
         </div>
         );
 }
-
-
-
-
 
 export default CustomerForm

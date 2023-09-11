@@ -1,7 +1,5 @@
 from django.db import models
-# from django.urls import reverse
 from django.urls import reverse
-# Create your models here.
 
 
 class AutomobileVO(models.Model):
@@ -20,8 +18,6 @@ class Salesperson(models.Model):
 
     def __str__(self):
         return self.employee_id
-    # def get_url(self):
-    #     return reverse("show_shoe_details", kwargs={"id": self.id})
 
 
 class Customer(models.Model):

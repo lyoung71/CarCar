@@ -18,7 +18,6 @@ function VehicleModelForm() {
                 "Content-Type": "application/json",
             },
         };
-        console.log(formData)
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
             setFormData({
@@ -45,7 +44,6 @@ function VehicleModelForm() {
         const response = await fetch(url);
         if(response.ok) {
             const data = await response.json();
-            console.log(data)
             setManufacturers(data.manufacturers);
         }
     }
@@ -86,6 +84,5 @@ function VehicleModelForm() {
     </div>
     );
 }
-
 
 export default VehicleModelForm

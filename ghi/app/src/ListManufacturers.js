@@ -14,7 +14,6 @@ function ListManufacturers() {
         const response = await fetch(manufacturerUrl, fetchConfig);
 
         if (response.ok) {
-            console.log("The manufacturer has been deleted");
             loadManufacturers();
         }
     }
@@ -53,8 +52,5 @@ function ListManufacturers() {
     </table>
     );
 }
-
-
-
 
 export default ListManufacturers

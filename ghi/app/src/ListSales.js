@@ -15,7 +15,6 @@ function ListSales(props) {
         const response = await fetch(saleUrl, fetchConfig);
 
         if (response.ok) {
-            console.log("The sale has been deleted");
             loadSales();
         }
     }
@@ -60,10 +59,5 @@ function ListSales(props) {
         </table>
         );
 }
-
-
-
-
-
 
 export default ListSales

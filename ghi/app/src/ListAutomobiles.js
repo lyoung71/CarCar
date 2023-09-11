@@ -15,7 +15,6 @@ function ListAutomobiles() {
         const response = await fetch(automobileUrl, fetchConfig);
 
         if (response.ok) {
-            console.log("The automobile has been deleted");
             loadAutomobiles();
         }
     }
@@ -42,6 +41,7 @@ function ListAutomobiles() {
                 <th>Color</th>
                 <th>Year</th>
                 <th>Model</th>
+                <th>Manufacturer</th>
                 <th>Sold</th>
             </tr>
         </thead>
@@ -53,7 +53,8 @@ function ListAutomobiles() {
                 <td>{ automobile.color }</td>
                 <td>{ automobile.year }</td>
                 <td>{ automobile.model.name }</td>
-                <td>{ automobile.sold }</td>
+                <td>{ automobile.model.manufacturer.name }</td>
+                <td>{ automobile.sold === true ? "Yes" : "No"}</td>
                 <td><button type="button" onClick={() => handleDelete(automobile.id)}>Delete</button></td>
             </tr>
             );

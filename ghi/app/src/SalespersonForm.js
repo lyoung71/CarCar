@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 
 function SalespersonForm() {
-
     const [formData, setFormData] = useState({
         first_name: "",
         last_name: "",
@@ -34,24 +33,13 @@ function SalespersonForm() {
         const value = e.target.value;
         const inputName = e.target.name;
 
-
         setFormData(formData=>({
             ...formData,
             [inputName]: value
         }));
     }
 
-    // const fetchData = async () => {
-    //     const url = "http://localhost:8090/api/salespeople/";
-    //     const response = await fetch(url);
-    //     if(response.ok) {
-    //         const data = await response.json();
-    //         setFormData(data.formData);
-
-    //     }
-    // }
-
-    // useEffect(() => {}, []);
+    useEffect(() => {}, []);
 
     return (
         <div className="row">
@@ -59,17 +47,14 @@ function SalespersonForm() {
                 <div className="shadow p-4 mt-4">
                     <h1>Create a new salesperson</h1>
                     <form onSubmit={handleSubmit} id="create-salesperson-form">
-
                         <div className="form-floating mb-3">
                             <input value={formData.first_name} onChange={handleFormChange} placeholder="First name" required type="text" name="first_name" id="first_name" className="form-control" />
                             <label htmlFor="first_name">First name</label>
                         </div>
-
                         <div className="form-floating mb-3">
                             <input value={formData.last_name} onChange={handleFormChange} placeholder="Last name" required type="text" name="last_name" id="last_name" className="form-control" />
                             <label htmlFor="last_name">Last name</label>
                         </div>
-
                         <div className="form-floating mb-3">
                             <input value = {formData.employee_id} onChange={handleFormChange} placeholder="Employee ID" required type="text" name="employee_id" id="employee_id" className="form-control" />
                             <label htmlFor="employee_id">Employee ID</label>
@@ -82,6 +67,5 @@ function SalespersonForm() {
         );
 
 }
-
 
 export default SalespersonForm

@@ -15,7 +15,6 @@ function ListVehicleModels() {
         const response = await fetch(modelUrl, fetchConfig);
 
         if (response.ok) {
-            console.log("The model has been deleted");
             loadModels();
         }
     }
