@@ -149,9 +149,17 @@ def finish_appointment(request, id):
     try:
         content = json.loads(request.body)
         appointment = Appointment.objects.get(id=id)
-        prop = "status"
-        if prop in content:
-            setattr(appointment, prop, content[prop])
+        props = [
+            "date_time",
+            "reason",
+            "status",
+            "vin",
+            "customer",
+            "technician"
+        ]
+        for prop in props:
+            if prop in content:
+                setattr(appointment, prop, content[prop])
         appointment.save()
         return JsonResponse(
             appointment,

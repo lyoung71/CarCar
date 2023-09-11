@@ -26,7 +26,6 @@ function AppointmentList() {
         };
         const appointmentResponse = await fetch(appointmentUrl, fetchConfig);
         if (appointmentResponse.ok) {
-            console.log("Appointment successfully deleted!");
             loadAppointments();
         }
     };

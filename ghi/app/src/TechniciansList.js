@@ -26,7 +26,6 @@ function TechnicianList() {
         };
         const technicianResponse = await fetch(technicianUrl, fetchConfig);
         if (technicianResponse.ok) {
-            console.log("Technician successfully deleted!");
             loadTechnicians();
         }
     };
