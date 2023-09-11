@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from.models import AutomobileVO, Sale, Salesperson, Customer
+from .models import AutomobileVO, Sale, Salesperson, Customer
 from django.views.decorators.http import require_http_methods
 from json import loads
 from django.http import JsonResponse
@@ -185,6 +184,6 @@ def show_customer(request, id):
                 safe=False
             )
         except Customer.DoesNotExist:
-            response = JsonResponse({"message" : "Does not exist"})
+            response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response

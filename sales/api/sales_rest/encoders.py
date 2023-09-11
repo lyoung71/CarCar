@@ -1,4 +1,4 @@
-from.models import AutomobileVO, Sale, Salesperson, Customer
+from .models import AutomobileVO, Sale, Salesperson, Customer
 from common.json import ModelEncoder
 
 
