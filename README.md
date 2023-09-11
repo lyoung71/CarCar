@@ -3,7 +3,7 @@
 Team:
 
 * Landon - Sales
-* Person 2 - Which microservice?
+* Daniel - Services
 
 ## Design
 
